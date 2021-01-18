@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_settings_title">Einstellungen</string>
+    <string name="menu_info_title">W3Lager-Info</string>
+    <string name="menu_about_title">Über W3LagerRun</string>
+    <string name="menu_exit_title">Beenden</string>
+    <string name="menu_close_title">Schließen</string>
+    <string name="url_edit_title">W3Lager-URL</string>
+    <string name="onChrome">auf Chrome\u0020</string>
+    <string name="noChrome">Google Chrome Browser nicht gefunden.\n\nW3LagerRun wird jetzt beendet!\n</string>
+    <string name="oldChrome">Google Chrome Browser ist zu alt.\n\nW3LagerRun wird jetzt beendet!\n</string>
+    <string name="browser_button" translatable="false">Browserbutton</string>
+</resources>
