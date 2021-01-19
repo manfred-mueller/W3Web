@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 import static android.text.TextUtils.isEmpty;
 
-public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+    public class MainActivity extends AppCompatActivity {
 
     MenuItem settingsItem;
     MenuItem infoItem;
@@ -37,25 +37,14 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         TextView chromeVersionTextView = findViewById(R.id.chromeVersion);
 
         if(chromeSuites) {
-            setupSharedPreferences();
-            PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
             PackageManager pm = context.getPackageManager();
-            PackageInfo pInfo = null;
-            try {
-                pInfo = pm.getPackageInfo("com.android.chrome", 0);
-            } catch (PackageManager.NameNotFoundException e) {
-                Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.oldChrome), Toast.LENGTH_LONG);
-                LinearLayout layout = (LinearLayout) toast.getView();
-                if (layout.getChildCount() > 0) {
-                    TextView tv = (TextView) layout.getChildAt(0);
-                    tv.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-                }
-                toast.show();
-                finish();
-            }
             String ChromeText = getString(R.string.onChrome);
-            assert pInfo != null;
-            String ChromeVersion = pInfo.versionName;
+            String ChromeVersion = null;
+            try {
+                ChromeVersion = pm.getPackageInfo("com.android.chrome", 0).versionName;
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
             String ChromeVersionText = ChromeText + ChromeVersion;
             chromeVersionTextView.setText(ChromeVersionText);
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -67,30 +56,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             }
         }
     }
-
-    private void setupSharedPreferences() {
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        setEditUrlValue(sharedPreferences);
-    }
-
-    private void setEditUrlValue(SharedPreferences sharedPreferences){
-        String defaultEditUrlValue = sharedPreferences.getString(getString(R.string.url_edit_key),
-                getString(R.string.url_edit_default));
-    }
-
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if(key.equals(getString(R.string.url_edit_key))){
-            setEditUrlValue(sharedPreferences);
-        }
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
     }
 
     @Override
