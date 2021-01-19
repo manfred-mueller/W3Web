@@ -5,9 +5,11 @@
     <string name="menu_about_title">About W3LagerRun</string>
     <string name="menu_exit_title">Exit</string>
     <string name="menu_close_title">Close</string>
+    <string name="start_check_key" translatable="false">StartCheckKey</string>
+    <string name="start_check_title" translatable="false">Autostart</string>
     <string name="url_edit_key" translatable="false">EditUrlKey</string>
-    <string name="url_edit_title">EditUrlValue</string>
-    <string name="url_edit_default" translatable="false">https://www.w3coach.de/index.php?id=5</string>
+    <string name="url_edit_title">EditUrlValue [ with prefix http(s):// ]</string>
+    <string name="url_edit_default" translatable="false">http://about:blank</string>
     <string name="onChrome">on Chrome\u0020</string>
     <string name="noChrome">Google chrome browser not found.\n\nW3LagerRun may not function properly!\n</string>
     <string name="oldChrome">Google chrome browser ist too old.\n\nW3LagerRun may not function properly!\n</string>

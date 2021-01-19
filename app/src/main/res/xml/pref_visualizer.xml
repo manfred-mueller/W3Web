@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <EditTextPreference
-        android:defaultValue="https://www.w3coach.de"
+        android:defaultValue="@string/url_edit_default"
         android:key="@string/url_edit_key"
         android:title="@string/url_edit_title" />
 

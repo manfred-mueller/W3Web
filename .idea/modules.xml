@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/W3Lager.iml" filepath="$PROJECT_DIR$/.idea/modules/W3Lager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/W3Lager.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/W3Lager.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/W3LagerRun.iml" filepath="$PROJECT_DIR$/.idea/modules/W3LagerRun.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/W3LagerRun.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/W3LagerRun.app.iml" />
     </modules>
   </component>
 </project>

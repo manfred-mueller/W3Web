@@ -14,10 +14,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static android.text.TextUtils.isEmpty;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -31,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         boolean chromeSuites = checkApp("com.android.chrome", 68);
-        TextView chromeVersionTextView = (TextView)findViewById(R.id.chromeVersion);
+        TextView chromeVersionTextView = findViewById(R.id.chromeVersion);
 
         if(chromeSuites) {
             setupSharedPreferences();
@@ -50,8 +53,18 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 toast.show();
                 finish();
             }
+            String ChromeText = getString(R.string.onChrome);
+            assert pInfo != null;
             String ChromeVersion = pInfo.versionName;
-            chromeVersionTextView.setText(getString(R.string.onChrome) + ChromeVersion);
+            String ChromeVersionText = ChromeText + ChromeVersion;
+            chromeVersionTextView.setText(ChromeVersionText);
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+            String startCheck = getString(R.string.url_edit_default);
+            if (!startCheck.equals(sharedPreferences.getString(getString(R.string.url_edit_key),
+                    getString(R.string.url_edit_default))) && !startCheck.isEmpty())
+            {
+                browserClick(findViewById(R.id.infoView));
+            }
         }
     }
 
@@ -126,17 +139,25 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
     public void browserClick(View view) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        Uri W3LagerUri = Uri.parse(sharedPreferences.getString(getString(R.string.url_edit_key),
-                getString(R.string.url_edit_default)));
-        Intent i = new Intent(Intent.ACTION_VIEW, W3LagerUri);
-        i.setPackage("com.android.chrome");
-        startActivity(i);
+        String UriString = sharedPreferences.getString(getString(R.string.url_edit_key),
+                getString(R.string.url_edit_default));
+        if (!isEmpty(UriString) && URLUtil.isValidUrl(UriString))
+        {
+            assert UriString != null;
+            if(!UriString.startsWith("http://")&& !UriString.startsWith("https://")){
+                UriString = "https://"+UriString;
+            }
+            Uri W3LagerUri = Uri.parse(UriString);
+            Intent i = new Intent(Intent.ACTION_VIEW, W3LagerUri);
+            i.setPackage("com.android.chrome");
+            startActivity(i);
+        }
     }
 
     public void closeClick() {
         WebView wv;
         wv = findViewById(R.id.infoView);
-        wv.loadUrl("about:blank");
+        wv.loadUrl(getString(R.string.url_edit_default));
         wv.setVisibility(View.GONE);
         settingsItem.setVisible(true);
         infoItem.setVisible(true);
