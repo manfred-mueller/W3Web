@@ -1,7 +1,6 @@
 package com.manfredmuellermuelheim.w3lager;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -9,8 +8,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,6 +16,8 @@ import android.webkit.URLUtil;
 import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import static android.text.TextUtils.isEmpty;
 
@@ -162,8 +161,8 @@ import static android.text.TextUtils.isEmpty;
                     throw new PackageManager.NameNotFoundException();
                 t.addCategory(Intent.CATEGORY_LAUNCHER);
                 startActivity(t);
-            } catch (PackageManager.NameNotFoundException e) {
-                return;
+            } catch (PackageManager.NameNotFoundException ignored)
+            {
             }
     }
 
