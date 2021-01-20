@@ -1,6 +1,7 @@
 package com.manfredmuellermuelheim.w3lager;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -8,17 +9,16 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.URLUtil;
 import android.webkit.WebView;
-import android.widget.LinearLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import static android.text.TextUtils.isEmpty;
 
@@ -29,30 +29,44 @@ import static android.text.TextUtils.isEmpty;
     MenuItem aboutItem;
     MenuItem closeItem;
     MenuItem exitItem;
+    ImageButton supportButton;
+    public int chromeVer = 68;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        boolean chromeSuites = checkApp("com.android.chrome", 68);
+        boolean chromeCheck = checkApps("Chrome","com.android.chrome");
+        boolean quicksupportCheck = checkApps("Quicksupport", "com.teamviewer.quicksupport.market");
         TextView chromeVersionTextView = findViewById(R.id.chromeVersion);
 
-        if(chromeSuites) {
+        if(chromeCheck) {
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
             PackageManager pm = context.getPackageManager();
-            String ChromeText = getString(R.string.onChrome);
+            String UrlPrefix = getString(R.string.url_prefix);
+            String UrlText = sharedPreferences.getString(getString(R.string.url_edit_key), getString(R.string.url_edit_default));
+            String ChromePrefix = getString(R.string.chrome_prefix);
             String ChromeVersion = null;
             try {
                 ChromeVersion = pm.getPackageInfo("com.android.chrome", 0).versionName;
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
-            String ChromeVersionText = ChromeText + ChromeVersion;
+            String ChromeVersionText = UrlPrefix + UrlText + ChromePrefix + ChromeVersion;
             chromeVersionTextView.setText(ChromeVersionText);
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
             String startCheck = getString(R.string.url_edit_default);
             if (!startCheck.equals(sharedPreferences.getString(getString(R.string.url_edit_key),
                     getString(R.string.url_edit_default))) && !startCheck.isEmpty())
             {
                 browserClick(findViewById(R.id.infoView));
+            }
+        }
+        else {
+            chromeVersionTextView.setText(R.string.chromeWarning);
+        }
+        if (quicksupportCheck) {
+            {
+                supportButton = findViewById(R.id.support_button);
+                supportButton.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -134,12 +148,26 @@ import static android.text.TextUtils.isEmpty;
         exitItem.setVisible(true);
     }
 
-    public void exitClick(View view) {
-        finish();
-        System.exit(0);
+        public void exitClick(View view) {
+            finish();
+            System.exit(0);
+        }
+
+        public void supportClick(View view) {
+            Intent t;
+            PackageManager manager = getPackageManager();
+            try {
+                t = manager.getLaunchIntentForPackage("com.teamviewer.quicksupport.market");
+                if (t == null)
+                    throw new PackageManager.NameNotFoundException();
+                t.addCategory(Intent.CATEGORY_LAUNCHER);
+                startActivity(t);
+            } catch (PackageManager.NameNotFoundException e) {
+                return;
+            }
     }
 
-    public void infoClick(View view) {
+        public void infoClick(View view) {
         WebView wv;
         wv = findViewById(R.id.infoView);
         wv.loadUrl("file:///android_asset/w3lager.htm");
@@ -163,36 +191,24 @@ import static android.text.TextUtils.isEmpty;
         closeItem.setVisible(true);
     }
 
-        final Context context = this;
+    final Context context = this;
 
-    private boolean checkApp(String uri, int appVer) {
-        PackageInfo pInfo;
-        try {
-            pInfo = getPackageManager().getPackageInfo(uri, 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.noChrome), Toast.LENGTH_LONG);
-            LinearLayout layout = (LinearLayout) toast.getView();
-            if (layout.getChildCount() > 0) {
-                TextView tv = (TextView) layout.getChildAt(0);
-                tv.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+        private boolean checkApps(String pkgName, String uri) {
+            PackageInfo pkgInfo;
+            try {
+                pkgInfo = getPackageManager().getPackageInfo(uri, 0);
+            } catch (PackageManager.NameNotFoundException e) {
+                return false;
             }
-            toast.show();
-            finish();
+            if (pkgInfo != null) {
+                int firstDotIndex = pkgInfo.versionName.indexOf(".");
+                String majorVersion = pkgInfo.versionName.substring(0, firstDotIndex);
+                if (pkgName.equals("Quicksupport")) {
+                    return true;
+                } else {
+                    return Integer.parseInt(majorVersion) > chromeVer;
+                }
+            }
             return false;
         }
-        if (pInfo != null) {
-            int firstDotIndex = pInfo.versionName.indexOf(".");
-            String majorVersion = pInfo.versionName.substring(0, firstDotIndex);
-            return Integer.parseInt(majorVersion) > appVer;
-        }
-        Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.oldChrome), Toast.LENGTH_LONG);
-        LinearLayout layout = (LinearLayout) toast.getView();
-        if (layout.getChildCount() > 0) {
-            TextView tv = (TextView) layout.getChildAt(0);
-            tv.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-        }
-        toast.show();
-        finish();
-        return false;
-    }
 }
