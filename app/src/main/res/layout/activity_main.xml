@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.manfredmuellermuelheim.w3lager.MainActivity">
+    tools:context="com.nass.ek.w3lager.MainActivity">
 
     <TextView
         android:id="@+id/chromeVersion"

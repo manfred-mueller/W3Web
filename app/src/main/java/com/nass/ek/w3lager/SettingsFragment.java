@@ -1,4 +1,4 @@
-package com.manfredmuellermuelheim.w3lager;
+package com.nass.ek.w3lager;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
