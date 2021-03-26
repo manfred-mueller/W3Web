@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <EditTextPreference
         android:defaultValue="@string/url_edit_default"
+        android:colorBackground="@color/colorUrlEdit"
         android:key="@string/url_edit_key"
         android:title="@string/url_edit_title" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="@string/autostart_key"
+        android:onClick="infoClick"
+        android:title="@string/autostart_title"
+        tools:visibility="invisible" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="@string/autourl_key"
+        android:title="@string/autourl_title" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="@string/usefox_key"
+        android:title="@string/browser_title" />
 
 </PreferenceScreen>

@@ -1,20 +1,33 @@
 <resources>
-    <string name="app_name" translatable="false">W3LagerRun</string>
-    <string name="menu_settings_title">URL Settings</string>
+    <string name="app_name" translatable="false">W3Web</string>
+    <string name="menu_settings_title">Options</string>
+    <string name="autostart_title">Start with system</string>
+    <string name="autourl_title">Open URL at start</string>
+    <string name="browser_title">Use Firefox instead of Chrome</string>
     <string name="menu_info_title">W3Lager info</string>
-    <string name="menu_about_title">About W3LagerRun</string>
+    <string name="menu_about_title">About W3Web</string>
     <string name="menu_exit_title">Exit</string>
+    <string name="menu_wireless_title">Wifi settings</string>
+    <string name="menu_date_title">Date/time settings</string>
+    <string name="menu_keytest_title">Keycodes</string>
     <string name="menu_close_title">Close</string>
     <string name="start_check_key" translatable="false">StartCheckKey</string>
     <string name="start_check_title" translatable="false">Autostart</string>
     <string name="url_prefix" translatable="false">URL:\u0020</string>
-    <string name="chrome_prefix" translatable="false">\nChrome:\u0020</string>
+    <string name="chrome_prefix" translatable="false">\nGoogle Chrome:\u0020</string>
+    <string name="fox_prefix" translatable="false">\nMozilla Firefox:\u0020</string>
+    <string name="autostart_key" translatable="false">AutoStartKey</string>
+    <string name="autourl_key" translatable="false">AutoUrlKey</string>
+    <string name="usefox_key" translatable="false">UseFoxKey</string>
     <string name="url_edit_key" translatable="false">EditUrlKey</string>
     <string name="url_edit_title">W3Lager-URL [ with prefix http(s):// ]</string>
     <string name="url_edit_default" translatable="false">http://about:blank</string>
-    <string name="onChrome">Chrome\u0020</string>
+    <string name="show_key" translatable="false">ShowKey</string>
     <string name="warning">Warning!</string>
-    <string name="chromeWarning">Google chrome browser either not found or\ninstalled version string is below 68.\nIt is strongly recommended to install the actual Google Chrome version.\n\nOtherwise a proper W3Lager function could not be guaranteed!\n</string>
-    <string name="oldChrome">Google chrome browser ist too old.\n\nW3LagerRun may not function properly!\n</string>
+    <string name="browserWarning">No suitable browser found.\nIt is strongly recommended installing either the actual Google Chrome or Mozilla Firefox version.\n\nOtherwise a proper W3Lager function could not be guaranteed!\n</string>
     <string name="browser_button" translatable="false">Browserbutton</string>
+    <string name="support_button" translatable="false">Supportbutton</string>
+    <string name="scanner_button" translatable="false">Scannerbutton</string>
+    <string name="start_with_system">Start with system</string>
+    <string name="press_a_key">Please press a key. The associated keycode will be shown here.</string>
 </resources>

@@ -3,32 +3,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_settings"
-        android:icon="@drawable/w3lager"
+        android:icon="@drawable/logo"
         android:title="@string/menu_settings_title"
-        android:visibility="visible"
-        app:showAsAction="never"></item>
+        android:visibility="gone"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_wireless"
+        android:title="@string/menu_wireless_title"
+        android:visibility="gone"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_date"
+        android:title="@string/menu_date_title"
+        android:visibility="gone"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_keytest"
+        android:title="@string/menu_keytest_title"
+        android:visibility="gone"
+        app:showAsAction="never" />
     <item
         android:id="@+id/menu_info"
-        android:icon="@drawable/w3lager_info"
+        android:icon="@drawable/info"
         android:title="@string/menu_info_title"
         android:visibility="visible"
-        app:showAsAction="always"></item>
+        app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/menu_about"
-        android:icon="@drawable/w3lager_help"
+        android:id="@+id/menu_help"
+        android:icon="@drawable/help"
         android:title="@string/menu_about_title"
         android:visibility="visible"
-        app:showAsAction="always"></item>
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_close"
         android:icon="@android:drawable/ic_delete"
         android:title="@string/menu_close_title"
         android:visibility="invisible"
-        app:showAsAction="always"></item>
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_exit"
-        android:icon="@drawable/w3lager_exit"
+        android:icon="@drawable/exit"
         android:title="@string/menu_exit_title"
         android:visibility="visible"
-        app:showAsAction="never"></item>
+        app:showAsAction="never" />
 </menu>

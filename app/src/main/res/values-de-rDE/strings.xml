@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="menu_settings_title">URL-Einstellungen</string>
+    <string name="menu_settings_title">Optionen</string>
+    <string name="autostart_title">Mit System starten</string>
+    <string name="autourl_title">URL beim Start aufrufen</string>
+    <string name="browser_title">Benutze Firefox statt Chrome</string>
     <string name="menu_info_title">W3Lager-Info</string>
-    <string name="menu_about_title">Über W3LagerRun</string>
+    <string name="menu_about_title">Über W3Web</string>
     <string name="menu_exit_title">Beenden</string>
     <string name="menu_close_title">Schließen</string>
+    <string name="menu_wireless_title">Wifi-Einstellungen</string>
+    <string name="menu_date_title">Datum-/Uhrzeit-Einstellungen</string>
+    <string name="menu_keytest_title">Tastenbelegung</string>
     <string name="url_edit_title">W3Lager-URL [ mit Prefix http(s):// ]</string>
-    <string name="onChrome">\nauf Chrome\u0020</string>
     <string name="warning">Warnung!</string>
-    <string name="chromeWarning">Google Chrome Browser nicht gefunden oder\ndie installierte Version ist niedriger als 68.\nEs wird dringend empfohlen, die aktuelle\nGoogle Chrome Version zu installieren.\n\nAndernfalls ist eine einwandfreie\nW3Lager-Funktion nicht gewährleistet!</string>
-    <string name="oldChrome">Google Chrome Browser ist zu alt.\n\nW3LagerRun wird jetzt beendet!\n</string>
-    <string name="browser_button" translatable="false">Browserbutton</string>
+    <string name="browserWarning">Kein passender Browser gefunden.\nEs wird dringend empfohlen, die aktuelle\nGoogle Chrome oder Mozilla Firefox Version zu installieren.\n\nAndernfalls ist eine einwandfreie\nW3Lager-Funktion nicht gewährleistet!</string>
+    <string name="start_with_system">Start with system</string>
+    <string name="press_a_key">Bitte eine Taste drücken. Der dazugehörige Keycode wird hier angezeigt.</string>
 </resources>
