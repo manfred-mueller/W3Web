@@ -206,8 +206,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     UriString = "https://" + UriString;
                 }
                 Uri W3LagerUri = Uri.parse(UriString);
-                Intent i = new Intent(Intent.ACTION_VIEW, W3LagerUri);
-                i.setPackage("com.android.chrome");
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                builder.setShowTitle(false);
+                builder.setShareState(CustomTabsIntent.SHARE_STATE_OFF);
+                builder.setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary));
+                CustomTabsIntent customTabsIntent = builder.build();
+                customTabsIntent.intent.setPackage("com.android.chrome");
+                customTabsIntent.launchUrl(this, W3LagerUri);
                 startActivity(i);
             }
         }
