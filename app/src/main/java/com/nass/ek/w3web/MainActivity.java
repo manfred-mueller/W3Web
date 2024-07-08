@@ -1,6 +1,7 @@
 package com.nass.ek.w3web;
 
-import android.app.Activity;
+import static android.text.TextUtils.isEmpty;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,11 +20,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
 import java.util.regex.Pattern;
-
-import static android.text.TextUtils.isEmpty;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -201,7 +202,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         if ((checkApps("Chrome", "com.android.chrome")) && (!useFoxCheck)) {
             String UriString = sharedPreferences.getString(getString(R.string.url_edit_key), getString(R.string.url_edit_default));
             if (!isEmpty(UriString) && URLUtil.isValidUrl(UriString)) {
-                assert UriString != null;
                 if (!UriString.startsWith("http://") && !UriString.startsWith("https://")) {
                     UriString = "https://" + UriString;
                 }
@@ -213,13 +213,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 CustomTabsIntent customTabsIntent = builder.build();
                 customTabsIntent.intent.setPackage("com.android.chrome");
                 customTabsIntent.launchUrl(this, W3LagerUri);
-                startActivity(i);
             }
         }
         else if ((checkApps("Firefox", "org.mozilla.firefox")) && (useFoxCheck)) {
             String UriString = sharedPreferences.getString(getString(R.string.url_edit_key), getString(R.string.url_edit_default));
             if (!isEmpty(UriString) && URLUtil.isValidUrl(UriString)) {
-                assert UriString != null;
                 if (!UriString.startsWith("http://") && !UriString.startsWith("https://")) {
                     UriString = "https://" + UriString;
                 }
@@ -253,12 +251,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public void appClick(String pkgName) {
 
         switch (pkgName) {
-            case "Quicksupport":
-                launchPackage = "com.teamviewer.quicksupport.market";
-                break;
-            case "Scanner":
-                launchPackage = "com.rscja.scanner";
-                break;
+            case "Quicksupport" -> launchPackage = "com.teamviewer.quicksupport.market";
+            case "Scanner" -> launchPackage = "com.rscja.scanner";
         }
 
         Intent t;
